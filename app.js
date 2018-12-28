@@ -14,7 +14,6 @@ const argv = yargs
     .argv;
 
 var address=encodeURIComponent(argv.a)
-var key = 'AIzaSyDDIeggpk_HAF2DPmUpCRmHeL2d1jBS3rE'
 //console.log(address)
 var lat,long;
 request({
