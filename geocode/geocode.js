@@ -6,7 +6,6 @@ var req = (address,key,callback)=>{
         json:true,
     },(error,response,body)=>{
         if(error){
-            console.log('Unable to connect to server')
             callback(error)
         }else if(response.body.status==='OK'){
             lat = (JSON.stringify(body.results[0].geometry.location.lat));
@@ -16,7 +15,6 @@ var req = (address,key,callback)=>{
                 lat,
                 long
             })
-            console.log(response.body.status)
             // callback(resp)
         }else if(body.status === 'ZERO_RESULTS'){
             callback('Unnable to find address')

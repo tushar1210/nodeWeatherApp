@@ -1,6 +1,7 @@
 //const request = require('request');
 const yargs = require('yargs');
 const geocode = require('./geocode/geocode.js')
+const weather = require('./weather.js')
 const argv = yargs
     .options({
         a: {
@@ -8,24 +9,35 @@ const argv = yargs
             alias:'address',
             describe:'weather for address',
             string:true,
-        }
+        },
+        
     })
     .help()
     .alias('help','h')
     .argv;
 
 
-var key = 'AIzaSyDDIeggpk_HAF2DPmUpCRmHeL2d1jBS3rE'
+var key1 = 'AIzaSyDDIeggpk_HAF2DPmUpCRmHeL2d1jBS3rE'
+var key2 = 'b1a8870a1057edcd604ec125da14da6c'
+
 //console.log(address)
-geocode.req(encodeURIComponent(argv.a),key,(error,results)=>{
+var a
+geocode.req(encodeURIComponent(argv.a),key1,(error,results)=>{
     if(error){
         console.log(error)
     }else{
+        var a = results
         console.log(JSON.stringify(results, undefined, 2));
+        weather.fetchTemp(key2,results.lat,results.long,(error,results)=>{
+            if(error){
+                console.log(error)
+            }else{
+                console.log(results)
+            }
+        })
     }
 
 })
 
-//b1a8870a1057edcd604ec125da14da6c
 //https://api.darksky.net/forecast/[key]/[latitude],[longitude]
 
