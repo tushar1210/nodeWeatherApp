@@ -1,5 +1,6 @@
-const request = require('request');
+//const request = require('request');
 const yargs = require('yargs');
+const geocode = require('./geocode/geocode.js')
 const argv = yargs
     .options({
         a: {
@@ -13,25 +14,18 @@ const argv = yargs
     .alias('help','h')
     .argv;
 
-var address=encodeURIComponent(argv.a)
+
+var key = 'AIzaSyDDIeggpk_HAF2DPmUpCRmHeL2d1jBS3rE'
 //console.log(address)
-var lat,long;
-request({
-    url:`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}`,
-    json:true,
-},(error,response,body)=>{
+geocode.req(encodeURIComponent(argv.a),key,(error,results)=>{
     if(error){
-        console.log('Unable to connect to server')
-    }else if(response.body.status==='OK'){
-        lat = (JSON.stringify(body.results[0].geometry.location.lat));
-        long = JSON.stringify(body.results[0].geometry.location.lng);
-        console.log(lat,long);
-        console.log(response.body.status)
+        console.log(error)
     }else{
-        console.log(response.statusCode,'Unnable to find address')
+        console.log(JSON.stringify(results, undefined, 2));
     }
-    // console.log(response.statusCode,error)
-    
 
 })
+
+//b1a8870a1057edcd604ec125da14da6c
+//https://api.darksky.net/forecast/[key]/[latitude],[longitude]
 
