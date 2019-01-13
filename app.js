@@ -17,7 +17,7 @@ const argv = yargs
     .argv;
 
 
-var key1 = 'AIzaSyDDIeggpk_HAF2DPmUpCRmHeL2d1jBS3rE'
+var key1 = 'AIzaSyAo4-HkaETgohfjNYUJWpU7C4W-vQCl-Ic'
 var key2 = 'b1a8870a1057edcd604ec125da14da6c'
 
 //console.log(address)
@@ -36,12 +36,24 @@ var key2 = 'b1a8870a1057edcd604ec125da14da6c'
 //     }
 
 // })
-
+var lat,lng
 geocode.geocodeAddress(encodeURIComponent(argv.a),key1).then((message)=>{
     console.log(message)
+    lat=message.lat
+    lng=message.lng
+    return weather.fetchTemp(key2,lat,lng)
+    
+}).then((mssg)=>{
+    console.log(mssg)
 }).catch((errorMessage)=>{
     console.log(errorMessage)
 })
+
+// weather.fetchTemp(key2,lat,lng).then((message)=>{
+//     console.log(message)
+// }).catch((error)=>{
+//     console.log(error)
+// })
 
 //https://api.darksky.net/forecast/[key]/[latitude],[longitude]
 

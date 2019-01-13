@@ -71,7 +71,7 @@ var geocodeAddress = (address,key)=>{
 
 module.exports={
     geocodeAddress,
-}
+} 
 
 // geocodeAddress('000000000067').then((message)=>{
 //     console.log(JSON.stringify(message,undefined,2))
