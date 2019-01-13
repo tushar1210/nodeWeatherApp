@@ -58,7 +58,10 @@ var geocodeAddress = (address,key)=>{
                resolve(obj)
             }else if(body.status === 'ZERO_RESULTS'){
                 reject('Unnable to find address')
-            }else{
+            }else if(body.status='OVER_QUERY_LIMIT'){
+                reject('Key Error')
+            }
+            else{
                 reject("Misc error")
             }
         })
